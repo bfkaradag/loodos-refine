@@ -13,6 +13,7 @@ import {
   OffLayoutArea,
 } from "components/layout";
 import { useTranslation } from "react-i18next";
+import { SignIn } from "pages/auth";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -25,7 +26,15 @@ function App() {
 
   return (
     <Refine
-      routerProvider={routerProvider}
+      routerProvider={{
+        ...routerProvider,
+        routes: [
+          {
+            element: <SignIn />,
+            path: "/sign-in"
+          },
+        ] as typeof routerProvider.routes
+      }}
       notificationProvider={notificationProvider}
       dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
       resources={[
